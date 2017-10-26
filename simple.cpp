@@ -21,7 +21,7 @@ int main()
 		int *arr;
 		cout << "Please enter the size of the bag: ";
 		cin >> t;
-		cout << "Please enter the number of stuff ";
+		cout << "Please enter the number of stuff: ";
 		cin >> size;
 		cout << "Please enter the size of these stuff: ";
 
