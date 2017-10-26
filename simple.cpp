@@ -30,6 +30,7 @@ int main()
 			cin >> arr[i];
 
 		sort(arr, arr + size);
+		package(arr, 0, size);
 		print();
 
 		return 0;
@@ -51,12 +52,16 @@ void package(int *arr, int start, int end)
 		//递归前先把第一个元素压入栈内
 		st.push(arr[i - 1]);
 		sum += arr[i - 1];
+		
 		//递归后面的元素（从第二个开始）
 		package(arr, i, end);
+
+
 		//递归后将第一个元素弹出
 		sum -= st.top();
 		st.pop();
-	}	
+	}
+	
 }
 
 void updateSet()
