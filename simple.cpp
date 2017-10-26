@@ -5,7 +5,7 @@
 #include <set>
 using namespace std;
 
-bool package(int *arr, int start, int end);
+void package(int *arr, int start, int end);
 void print();
 void updateSet();
 
@@ -30,42 +30,33 @@ int main()
 			cin >> arr[i];
 
 		sort(arr, arr + size);
-
-		if (package(arr, 0, size))
-			print();
-		else
-			cout << "No solution." << endl;
+		print();
 
 		return 0;
 
 }
 
-bool package(int *arr, int start, int end)
+void package(int *arr, int start, int end)
 {
 	if (start <= end && sum == t)
 	{
 		updateSet();
-		return true;
+		return;
 	}
 	else if ( start == end && sum != t || sum > t)
-		return false;
+		return;
 
-	bool flag = false;
 	for (int i = start + 1; i <= end; ++i)
 	{
 		//递归前先把第一个元素压入栈内
 		st.push(arr[i - 1]);
 		sum += arr[i - 1];
-		
 		//递归后面的元素（从第二个开始）
-		flag = flag || package(arr, i, end);
-
-
+		package(arr, i, end);
 		//递归后将第一个元素弹出
 		sum -= st.top();
 		st.pop();
-	}
-	return flag;	
+	}	
 }
 
 void updateSet()
@@ -75,6 +66,12 @@ void updateSet()
 
 void print()
 {
+	if (res.empty())
+	{
+		cout << "No solution." << endl;
+		return;
+	}
+
 	for (set<stack<int> >::iterator it = res.begin(); it != res.end(); ++it)
 	{	
 		stack<int> temp(*it);
