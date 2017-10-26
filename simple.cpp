@@ -32,7 +32,8 @@ int main()
 		sort(arr, arr + size);
 		package(arr, 0, size);
 		print();
-
+		
+		delete []arr;
 		return 0;
 
 }
