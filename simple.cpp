@@ -30,8 +30,11 @@ int main()
 			cin >> arr[i];
 
 		sort(arr, arr + size);
-		package(arr, 0, size);
-		print();
+
+		if (package(arr, 0, size))
+			print();
+		else
+			cout << "No solution." << endl;
 
 		return 0;
 
@@ -47,6 +50,7 @@ bool package(int *arr, int start, int end)
 	else if ( start == end && sum != t || sum > t)
 		return false;
 
+	bool flag = false;
 	for (int i = start + 1; i <= end; ++i)
 	{
 		//递归前先把第一个元素压入栈内
@@ -54,14 +58,14 @@ bool package(int *arr, int start, int end)
 		sum += arr[i - 1];
 		
 		//递归后面的元素（从第二个开始）
-		package(arr, i, end);
+		flag = flag || package(arr, i, end);
 
 
 		//递归后将第一个元素弹出
 		sum -= st.top();
 		st.pop();
 	}
-	
+	return flag;	
 }
 
 void updateSet()
